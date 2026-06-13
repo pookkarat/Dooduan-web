@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ไพ่บอกใจ — Mystic Tarot</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ดาวพื้นหลัง -->
+  <div class="stars-bg" id="starsBg"></div>
+
+  <!-- ===== หน้าแรก ===== -->
+  <section class="screen active" id="screenHome">
+    <div class="home-container">
+      <div class="moon-deco">🌙</div>
+      <div class="logo-wrap">
+        <div class="logo-title">ไพ่บอกใจ</div>
+        <div class="logo-sub">Mystic Tarot</div>
+      </div>
+
+      <p class="welcome-text">
+        หายใจลึก ๆ ตั้งคำถามให้ชัด<br />
+        แล้วปล่อยให้ไพ่ตอบแทนใจคุณ
+      </p>
+
+      <div class="question-box">
+        <label class="question-label" for="questionInput">✦ คำถามของคุณ ✦</label>
+        <textarea
+          id="questionInput"
+          class="question-input"
+          placeholder="เช่น ความรักของฉันจะเป็นอย่างไร? หรือ ฉันควรตัดสินใจเรื่องงานอย่างไร?"
+          rows="3"
+          maxlength="200"
+        ></textarea>
+        <div class="char-count" id="charCount">0 / 200</div>
+      </div>
+
+      <p class="mode-label">✨ เลือกวิธีดูไพ่ ✨</p>
+
+      <div class="mode-buttons">
+        <button class="btn-mode" id="btnFortune" onclick="selectMode('fortune')">
+          <span class="mode-icon">🔮</span>
+          <span class="mode-name">แม่หมอเปิดให้</span>
+          <span class="mode-desc">สุ่มไพ่ 3 ใบให้โดยอัตโนมัติ</span>
+        </button>
+        <button class="btn-mode" id="btnChoose" onclick="selectMode('choose')">
+          <span class="mode-icon">🃏</span>
+          <span class="mode-name">ฉันเลือกด้วยใจ</span>
+          <span class="mode-desc">เลือกไพ่เองจากใจ 3 ใบ</span>
+        </button>
+      </div>
+
+      <div class="warning-text">
+        คำทำนายนี้เป็นแนวทางเพื่อความบันเทิงและการทบทวนตัวเองเท่านั้น<br />
+        โปรดใช้วิจารณญาณในการตัดสินใจ
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== หน้าสับไพ่ ===== -->
+  <section class="screen" id="screenShuffle">
+    <div class="shuffle-container">
+      <h2 class="screen-title">สับไพ่</h2>
+      <p class="screen-subtitle" id="shuffleQuestion"></p>
+
+      <div class="shuffle-cards" id="shuffleCards">
+        <div class="shuffle-card c1"></div>
+        <div class="shuffle-card c2"></div>
+        <div class="shuffle-card c3"></div>
+        <div class="shuffle-card c4"></div>
+        <div class="shuffle-card c5"></div>
+      </div>
+
+      <p class="shuffle-hint" id="shuffleHint">กำลังสับไพ่ให้คุณ...</p>
+
+      <button class="btn-primary" id="btnShuffle" onclick="doShuffle()">
+        🔀 สับไพ่
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== หน้าเลือกไพ่ (โหมดเลือกเอง) ===== -->
+  <section class="screen" id="screenPick">
+    <div class="pick-container">
+      <h2 class="screen-title">เลือกไพ่ด้วยใจ</h2>
+      <p class="screen-subtitle" id="pickQuestion"></p>
+      <p class="pick-hint" id="pickHint">สัมผัสไพ่ที่ดึงดูดใจคุณ — เลือกใบที่ <span id="pickCount">1</span> จาก 3</p>
+
+      <div class="progress-dots">
+        <span class="dot" id="dot1"></span>
+        <span class="dot" id="dot2"></span>
+        <span class="dot" id="dot3"></span>
+      </div>
+
+      <div class="card-fan" id="cardFan"></div>
+
+      <button class="btn-primary hidden" id="btnReveal" onclick="goToResult()">
+        ✨ เปิดคำทำนาย
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== หน้าแสดงผล ===== -->
+  <section class="screen" id="screenResult">
+    <div class="result-container">
+      <div class="result-header">
+        <div class="moon-deco small">🌙</div>
+        <h2 class="screen-title">คำทำนายของคุณ</h2>
+        <p class="result-question" id="resultQuestion"></p>
+      </div>
+
+      <div class="cards-result" id="cardsResult"></div>
+
+      <div class="action-buttons">
+        <button class="btn-action btn-copy" onclick="copyResult()">📋 คัดลอกผลคำทำนาย</button>
+        <button class="btn-action btn-reshuffle" onclick="reshuffleMode()">🔀 สุ่มใหม่อีกครั้ง</button>
+        <button class="btn-action btn-switch" onclick="switchMode()">🔄 เลือกโหมดอื่น</button>
+        <button class="btn-action btn-home" onclick="goHome()">🏠 กลับหน้าแรก</button>
+      </div>
+
+      <div class="warning-text">
+        คำทำนายนี้เป็นแนวทางเพื่อความบันเทิงและการทบทวนตัวเองเท่านั้น<br />
+        โปรดใช้วิจารณญาณในการตัดสินใจ
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="cards.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
