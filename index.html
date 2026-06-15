@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ไพ่บอกใจ — Mystic Tarot</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="stars-bg" id="starsBg"></div>
+
+  <!-- ===== หน้าแรก ===== -->
+  <section class="screen active" id="screenHome">
+    <header class="site-header">
+      <div class="brand-wrap">
+        <div class="brand-badge">☾</div>
+        <div>
+          <div class="brand-title">ไพ่บอกใจ</div>
+          <div class="brand-sub">Mystic Tarot</div>
+        </div>
+      </div>
+
+      <nav class="site-nav">
+        <a href="#questionSection">อ่านไพ่</a>
+        <a href="#dailyCardSection">ไพ่ประจำวัน</a>
+        <a href="#modeSection">เลือกโหมด</a>
+        <a href="#historySection">ประวัติ</a>
+      </nav>
+    </header>
+
+    <div class="home-shell">
+      <div class="hero-panel">
+        <div class="hero-copy">
+          <div class="hero-pill">✨ ดูดวงไพ่ยิปซีออนไลน์แบบน่ารัก ใช้งานง่าย และมี AI ช่วยตีความ</div>
+          <h1 class="hero-title">ปลดล็อกคำตอบในใจ<br />ผ่านคำทำนายจากไพ่ 3 ใบ</h1>
+          <p class="hero-text">
+            พิมพ์คำถามที่อยากรู้ให้ชัดเจน แล้วเลือกว่าจะให้ระบบสุ่มไพ่ให้
+            หรือเลือกไพ่ด้วยตัวเองจากใจของคุณ
+          </p>
+
+          <div class="hero-action-row">
+            <a class="hero-cta primary" href="#questionSection">เริ่มดูดวงตอนนี้</a>
+            <a class="hero-cta secondary" href="#dailyCardSection">ดูไพ่ประจำวัน</a>
+          </div>
+        </div>
+
+        <div class="hero-cards-preview" aria-hidden="true">
+          <div class="preview-card p1"></div>
+          <div class="preview-card p2"></div>
+          <div class="preview-card p3"></div>
+        </div>
+      </div>
+
+      <div class="home-main-grid">
+        <main class="content-panel" id="questionSection">
+          <div class="section-head">
+            <h2>เริ่มคำทำนายของคุณ</h2>
+            <p>เขียนคำถามที่อยากรู้ แล้วเลือกวิธีเปิดไพ่ที่ตรงกับความรู้สึกของคุณ</p>
+          </div>
+
+          <div class="question-box card-soft">
+            <label class="question-label" for="questionInput">คำถามของคุณ</label>
+            <textarea
+              id="questionInput"
+              class="question-input"
+              placeholder="เช่น เขายังคิดถึงเราอยู่ไหม? งานที่กำลังทำอยู่มีแนวโน้มไปทางไหน? หรือ ช่วงนี้การเงินจะดีขึ้นไหม?"
+              rows="4"
+              maxlength="200"
+            ></textarea>
+            <div class="question-meta">
+              <span class="question-tip">พิมพ์ได้สูงสุด 200 ตัวอักษร</span>
+              <span class="char-count" id="charCount">0 / 200</span>
+            </div>
+          </div>
+
+          <div class="topic-box card-soft">
+            <div class="mini-section-title">เลือกหัวข้อคำถาม</div>
+            <p class="mini-section-desc">เลือกไว้ก่อนเพื่อให้คำทำนายและ AI อ่านตรงประเด็นขึ้น หรือปล่อยเป็น “ให้ระบบจับเอง” ก็ได้</p>
+            <div class="topic-chips" id="topicChips">
+              <button class="topic-chip active" type="button" data-topic="auto">✨ ระบบจับเอง</button>
+              <button class="topic-chip" type="button" data-topic="love">💗 ความรัก</button>
+              <button class="topic-chip" type="button" data-topic="work">💼 งาน / เรียน</button>
+              <button class="topic-chip" type="button" data-topic="money">🪙 การเงิน</button>
+              <button class="topic-chip" type="button" data-topic="general">🌙 ภาพรวม</button>
+            </div>
+          </div>
+
+          <div class="zodiac-box card-soft">
+            <div class="mini-section-title">วันเกิด / ราศี <span>ไม่บังคับ</span></div>
+            <p class="mini-section-desc">เพิ่มพลังส่วนตัวให้คำทำนายดูเฉพาะตัวขึ้น โดยไม่ต้องเก็บข้อมูลขึ้นเซิร์ฟเวอร์</p>
+            <div class="zodiac-grid">
+              <label>
+                <span>วันเกิด</span>
+                <input id="birthInput" class="soft-input" type="date" />
+              </label>
+              <label>
+                <span>ราศี</span>
+                <select id="zodiacSelect" class="soft-input">
+                  <option value="">ไม่ระบุ</option>
+                  <option value="aries">เมษ — ธาตุไฟ</option>
+                  <option value="taurus">พฤษภ — ธาตุดิน</option>
+                  <option value="gemini">เมถุน — ธาตุลม</option>
+                  <option value="cancer">กรกฎ — ธาตุน้ำ</option>
+                  <option value="leo">สิงห์ — ธาตุไฟ</option>
+                  <option value="virgo">กันย์ — ธาตุดิน</option>
+                  <option value="libra">ตุลย์ — ธาตุลม</option>
+                  <option value="scorpio">พิจิก — ธาตุน้ำ</option>
+                  <option value="sagittarius">ธนู — ธาตุไฟ</option>
+                  <option value="capricorn">มังกร — ธาตุดิน</option>
+                  <option value="aquarius">กุมภ์ — ธาตุลม</option>
+                  <option value="pisces">มีน — ธาตุน้ำ</option>
+                </select>
+              </label>
+            </div>
+            <div class="zodiac-hint" id="zodiacHint">ยังไม่ได้ระบุราศี</div>
+          </div>
+
+          <div class="suggest-box card-soft">
+            <div class="mini-section-title">คำถามแนะนำ</div>
+            <p class="mini-section-desc">กดเพื่อเติมคำถามตัวอย่างลงในช่องคำถามได้เลย</p>
+            <div class="suggest-chips">
+              <button type="button" data-question="เขายังคิดถึงเราอยู่ไหม และความสัมพันธ์นี้จะไปต่อได้หรือเปล่า">เขายังคิดถึงเราไหม</button>
+              <button type="button" data-question="คนคุยตอนนี้จริงจังกับเรามากแค่ไหน">คนคุยจริงจังไหม</button>
+              <button type="button" data-question="งานที่กำลังทำอยู่มีแนวโน้มไปทางไหน และควรระวังอะไร">งานจะไปทางไหน</button>
+              <button type="button" data-question="เดือนนี้การเงินของเราจะดีขึ้นไหม และควรจัดการเงินยังไง">การเงินเดือนนี้</button>
+              <button type="button" data-question="สิ่งที่เราควรรู้เกี่ยวกับชีวิตช่วงนี้คืออะไร">สิ่งที่ควรรู้ตอนนี้</button>
+            </div>
+          </div>
+
+          <div class="mode-section" id="modeSection">
+            <div class="section-head compact">
+              <h3>เลือกวิธีดูไพ่</h3>
+              <p>ทั้งสองโหมดจะเปิดไพ่ 3 ใบ แต่ประสบการณ์ต่างกัน</p>
+            </div>
+
+            <div class="mode-buttons">
+              <button class="btn-mode" id="btnFortune" onclick="selectMode('fortune')" type="button">
+                <span class="mode-icon">🔮</span>
+                <span class="mode-name">แม่หมอเปิดให้</span>
+                <span class="mode-desc">ระบบจะสับและสุ่มไพ่ 3 ใบให้ทันที เหมาะสำหรับคนที่อยากดูไว ๆ</span>
+              </button>
+
+              <button class="btn-mode" id="btnChoose" onclick="selectMode('choose')" type="button">
+                <span class="mode-icon">🃏</span>
+                <span class="mode-name">ฉันเลือกด้วยใจ</span>
+                <span class="mode-desc">เลือกไพ่ด้วยตัวเองจากสำรับ เหมาะกับคนที่อยากมีส่วนร่วมกับการเปิดไพ่</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <div class="feature-card card-soft">
+              <div class="feature-icon">🌙</div>
+              <div>
+                <h4>คำทำนาย 3 ตำแหน่ง</h4>
+                <p>อ่านไพ่แบบ ต้นเหตุ · ปัจจุบัน · แนวโน้ม เพื่อให้เชื่อมโยงกับคำถามได้ชัดขึ้น</p>
+              </div>
+            </div>
+
+            <div class="feature-card card-soft">
+              <div class="feature-icon">🤖</div>
+              <div>
+                <h4>มี AI ช่วยเรียบเรียง</h4>
+                <p>หลังเปิดไพ่แล้ว สามารถกดให้ AI วิเคราะห์ละเอียดจากคำถามและไพ่ที่ออกได้</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-text home-warning">
+            คำทำนายนี้เป็นแนวทางเพื่อความบันเทิงและการทบทวนตัวเองเท่านั้น
+            โปรดใช้วิจารณญาณในการตัดสินใจ
+          </div>
+        </main>
+
+        <aside class="daily-panel card-soft" id="dailyCardSection">
+          <div class="daily-title">ไพ่ประจำวัน</div>
+          <div class="daily-card-frame">
+            <img id="dailyCardImage" class="daily-card-image" src="" alt="ไพ่ประจำวัน" />
+          </div>
+          <div class="daily-card-name" id="dailyCardName">กำลังสุ่มไพ่...</div>
+          <p class="daily-card-meaning" id="dailyCardMeaning">กรุณารอสักครู่</p>
+          <button class="daily-refresh-btn" id="dailyRefreshBtn" type="button">สุ่มใหม่อีกใบ</button>
+        </aside>
+      </div>
+
+      <section class="history-section card-soft" id="historySection">
+        <div class="history-head">
+          <div>
+            <h2>ประวัติคำทำนาย</h2>
+            <p>บันทึกไว้ในเครื่องนี้เท่านั้น ใช้ดูย้อนหลังได้โดยไม่ต้องมีบัญชี</p>
+          </div>
+          <div class="history-actions">
+            <button class="btn-secondary small" id="btnRefreshHistory" type="button">รีเฟรช</button>
+            <button class="btn-secondary small danger" id="btnClearHistory" type="button">ล้างประวัติ</button>
+          </div>
+        </div>
+        <div class="history-list" id="historyList">
+          <div class="history-empty">ยังไม่มีประวัติคำทำนาย</div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ===== หน้าสับไพ่ ===== -->
+  <section class="screen" id="screenShuffle">
+    <div class="screen-shell narrow">
+      <div class="panel-title-group">
+        <div class="mini-badge">🔀</div>
+        <h2 class="screen-title">สับไพ่</h2>
+        <p class="screen-subtitle" id="shuffleQuestion"></p>
+      </div>
+
+      <div class="shuffle-box card-soft">
+        <div class="shuffle-cards" id="shuffleCards">
+          <div class="shuffle-card c1"></div>
+          <div class="shuffle-card c2"></div>
+          <div class="shuffle-card c3"></div>
+          <div class="shuffle-card c4"></div>
+          <div class="shuffle-card c5"></div>
+        </div>
+        <p class="shuffle-hint" id="shuffleHint">กำลังเตรียมไพ่ให้คุณ...</p>
+      </div>
+
+      <div class="screen-action-row">
+        <button class="btn-primary" id="btnShuffle" onclick="doShuffle()" type="button">🔀 สับไพ่</button>
+        <button class="btn-secondary" onclick="goHome()" type="button">↩ กลับหน้าแรก</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== หน้าเลือกไพ่ (โหมดเลือกเอง) ===== -->
+  <section class="screen" id="screenPick">
+    <div class="screen-shell wide">
+      <div class="panel-title-group">
+        <div class="mini-badge">🃏</div>
+        <h2 class="screen-title">เลือกไพ่ด้วยใจ</h2>
+        <p class="screen-subtitle" id="pickQuestion"></p>
+      </div>
+
+      <div class="card-soft pick-panel">
+        <p class="pick-hint" id="pickHint">สัมผัสไพ่ที่ดึงดูดใจคุณ — เลือกใบที่ <span id="pickCount">1</span> จาก 3</p>
+
+        <div class="progress-dots">
+          <span class="dot" id="dot1"></span>
+          <span class="dot" id="dot2"></span>
+          <span class="dot" id="dot3"></span>
+        </div>
+
+        <div class="card-fan" id="cardFan"></div>
+      </div>
+
+      <div class="screen-action-row center">
+        <button class="btn-primary hidden" id="btnReveal" onclick="goToResult()" type="button">✨ เปิดคำทำนาย</button>
+        <button class="btn-secondary" onclick="reshuffleMode()" type="button">🔄 กลับไปสับไพ่</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== หน้าแสดงผล ===== -->
+  <section class="screen" id="screenResult">
+    <div class="screen-shell result-shell">
+      <div class="result-header card-soft">
+        <div class="mini-badge">☾</div>
+        <h2 class="screen-title">คำทำนายของคุณ</h2>
+        <p class="result-question" id="resultQuestion"></p>
+      </div>
+
+      <div class="cards-result" id="cardsResult"></div>
+
+      <div class="action-buttons">
+        <button class="btn-action btn-copy" onclick="copyResult()" type="button">📋 คัดลอกผลคำทำนาย</button>
+        <button class="btn-action btn-reshuffle" onclick="reshuffleMode()" type="button">🔀 สุ่มใหม่อีกครั้ง</button>
+        <button class="btn-action btn-switch" onclick="switchMode()" type="button">🪄 เลือกโหมดอื่น</button>
+        <button class="btn-action" onclick="scrollToHistory()" type="button">📜 ดูประวัติ</button>
+        <button class="btn-action btn-home" onclick="goHome()" type="button">🏠 กลับหน้าแรก</button>
+      </div>
+
+      <div class="warning-text result-warning">
+        คำทำนายนี้เป็นแนวทางเพื่อความบันเทิงและการทบทวนตัวเองเท่านั้น
+        โปรดใช้วิจารณญาณในการตัดสินใจ
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="cards.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
